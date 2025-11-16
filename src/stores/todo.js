@@ -71,8 +71,6 @@ export const useTodoStore = defineStore('todo-store', {
       fetch('http://laravel_app.test/api/task/all')
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
-          
           this.todo = data['tasks']
           this.loading = false
         })
@@ -86,8 +84,6 @@ export const useTodoStore = defineStore('todo-store', {
     },
     deleteTodo(id) {
       // api call
-      // this.todo = this.todo.filter(t => t.id !== id)
-
       const newList = []
       for (let i = 0; i < this.todo.length; i++) {
         if (this.todo[i].id !== id) {
@@ -95,6 +91,13 @@ export const useTodoStore = defineStore('todo-store', {
         }
       }
       this.todo = newList
+      //
+      fetch(`http://laravel_app.test/api/task/delete/${id}`)
+        .then((res) => res.json())
+        .then((result) => console.log(result))
+        .catch((error) => {
+          console.log(error)
+        })
     },
     updateTodo() {
       // api call
