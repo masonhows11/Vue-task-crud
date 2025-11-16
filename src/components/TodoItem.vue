@@ -29,8 +29,8 @@ defineProps({
 
           {{ todoProps.status ? 'done' : 'pending' }}
           <input
-            @input="console.log('checkbox input checked')"
-            type="checkbox"
+            @input="todoStore.updateTodo(todoProps.id)"
+             type="checkbox"
             :checked="todoProps.status"/>
             
           <span class="checkmark"></span>
