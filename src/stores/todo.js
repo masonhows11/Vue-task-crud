@@ -85,12 +85,14 @@ export const useTodoStore = defineStore('todo-store', {
         body: todo.body,
         status: false,
       }
+      // add this to state
+      this.todo.push(newTask)
       // api call
       fetch('http://laravel_app.test/api/task/new', {
         method: 'POST',
         body: JSON.stringify(newTask),
-      }).then((res) => {
-
+      })
+        .then((res) => {
           console.log(res.json())
         })
         .catch((error) => {
