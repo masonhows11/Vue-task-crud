@@ -6,17 +6,14 @@ const toggleTheme = inject('toggleTheme')
 
 <template>
   <div class="content">
-    <button @click="toggleTheme" class="bi bi-sun-fill">
-      {{ theme === "light" ? 'nightlight' : 'sunny'}}
+    <button @click="toggleTheme" class="">
+      <i :class="theme === 'light' ? 'bi bi-moon-fill' : 'bi bi-sun-fill' " ></i>
     </button>
   </div>
 </template>
 
 <style lang="scss" scoped>
-
   .content{
     display: flex;
   }
-  
-
 </style>
