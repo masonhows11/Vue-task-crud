@@ -1,25 +1,29 @@
 <script setup>
 // import { RouterLink, RouterView } from 'vue-router'
 // import HelloWorld from './components/HelloWorld.vue'
+import {RouterView} from 'vue-router'
+import {useTodoStore} from './stores/todo';
+import ThemeProvider from './providers/theme.vue'
+import ThemeDisplay from './components/ThemeDisplay.vue'
 
-import { RouterView } from 'vue-router'
-import { useTodoStore } from './stores/todo';
-const todoStore  = useTodoStore()
+const todoStore = useTodoStore()
 todoStore.getTodo()
 
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/" class="nav-link">Home</RouterLink>
-        <RouterLink to="/new-task" class="nav-link">New Todo</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <ThemeProvider>
+    <header>
+      <div class="wrapper">
+        <nav>
+          <RouterLink to="/" class="nav-link">Home</RouterLink>
+          <RouterLink to="/new-task" class="nav-link">New Todo</RouterLink>
+        </nav>
+        <ThemeDisplay></ThemeDisplay>
+      </div>
+    </header>
+    <RouterView/>
+  </ThemeProvider>
 </template>
 
 <style scoped>
@@ -31,13 +35,14 @@ header {
   justify-content: space-between;
 }
 
-nav .nav-link{
+nav .nav-link {
   color: #fff;
   padding: 5px 15px;
   border-radius: 5px;
   margin-right: 1.5rem;
 }
-.nav-link:hover{
+
+.nav-link:hover {
   background: #60a5fa;
 }
 
