@@ -91,11 +91,7 @@ export const useTodoStore = defineStore('todo-store', {
       fetch('http://laravel_app.test/api/task/new', {
         method: 'POST',
         body: JSON.stringify(newTask),
-      })
-        .then((res) => {
-          console.log(res.json())
-        })
-        .catch((error) => {
+      }).catch((error) => {
           this.errorMsg = error
           this.loading = false
         })
