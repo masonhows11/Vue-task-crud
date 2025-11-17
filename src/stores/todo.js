@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+// import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
 // const todos = [
@@ -92,9 +92,9 @@ export const useTodoStore = defineStore('todo-store', {
       fetch('http://laravel_app.test/api/task/new', {
         method: 'POST',
         body: JSON.stringify(newTask),
-        // headers: {
-        //   'Content-Type': 'application/json',
-        // },
+        headers: {
+          'Content-Type': 'application/json',
+        },
       }).catch((error) => {
         this.errorMsg = error
         this.loading = false
