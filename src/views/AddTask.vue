@@ -1,21 +1,23 @@
 <script setup>
-import { reactive } from 'vue'
+import { reactive,ref } from 'vue'
 //
 import Wrapper_section from '@/components/Wrapper_section.vue'
 // import todo state
 import { useTodoStore } from '@/stores/todo'
 // use the useTodoStore
 const todoStore = useTodoStore()
-
-const todo = reactive({
+const selectStatus = ref(1)
+const newTask = reactive({
   title: '',
   body: '',
-  status: '',
 })
 
 const submitForm = () => {
 
-  todoStore.addTodo(todo)
+  todoStore.addTodo({
+    ...newTask,
+    status:selectStatus.value
+  })
 }
 </script>
 
@@ -26,19 +28,21 @@ const submitForm = () => {
 
       <div>
         <label for="title">Title</label>
-        <input v-model="todo.title" type="text" id="title" />
+        <input v-model="newTask.title" type="text" id="title" />
       </div>
 
       <div>
         <label for="body">Body</label>
-        <textarea v-model="todo.body" name="" id="body" rows="4" cols="8"></textarea>
+        <textarea v-model="newTask.body" name="" id="body" rows="4" cols="8"></textarea>
       </div>
 
       <div>
+
         <label for="status">Status</label>
-        <select id="status" v-model="todo.status">
-          <option value="0">Active</option>
-          <option value="1">Deactive</option>
+        <label style="margin: 10px 0">: {{ newTask.status }}</label>
+        <select id="status" v-model="selectStatus">
+          <option :value="true">Active</option>
+          <option :value="false">DeActive</option>
         </select>
       </div>
 
