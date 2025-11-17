@@ -41,7 +41,7 @@ defineProps({
     <div class="body">
       <span>ID : {{ todoProps.id }}</span>
       <div>
-        <span>Date : {{ todoProps.createdAt }} </span>
+        <span>Date : {{ todoProps.created_at }} </span>
         <strong>Body : {{ todoProps.body }}</strong>
       </div>
     </div>

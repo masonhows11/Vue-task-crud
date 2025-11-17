@@ -1,6 +1,7 @@
 <script setup>
 // import { RouterLink, RouterView } from 'vue-router'
 // import HelloWorld from './components/HelloWorld.vue'
+// import AddTask from './views/AddTask.vue';
 import { RouterView } from 'vue-router'
 import { useTodoStore } from './stores/todo';
 const todoStore  = useTodoStore()
@@ -13,7 +14,7 @@ todoStore.getTodo()
     <div class="wrapper">
       <nav>
         <RouterLink to="/" class="nav-link">Home</RouterLink>
-        <RouterLink to="/new-todo" class="nav-link">New Todo</RouterLink>
+        <RouterLink to="/new-task" class="nav-link">New Todo</RouterLink>
       </nav>
     </div>
   </header>
