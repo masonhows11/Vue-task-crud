@@ -1,6 +1,6 @@
 <script setup>
 import Wrapper_section from '@/components/Wrapper_section.vue'
-import {reactive, ref, watch} from 'vue'
+import {reactive, ref, watch, computed} from 'vue'
 import {useRouter} from "vue-router";
 // import todo state
 import {useTodoStore} from '@/stores/todo'
@@ -19,6 +19,10 @@ const submitForm = () => {
     status: selectStatus.value
   })
 }
+
+const isFormValid = computed(() => {
+  return newTask.title === '' || newTask.body === '' || newTask.status === '';
+})
 // todo is object use as state in this project
 watch(todoStore.todo,
   () => router.push({name: 'home'}))
@@ -51,7 +55,7 @@ watch(todoStore.todo,
       </div>
 
       <div>
-        <button type="submit">Save Task</button>
+        <button :disabled="isFormValid" type="submit">Save Task</button>
       </div>
     </form>
   </Wrapper_section>
