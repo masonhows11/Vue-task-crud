@@ -1,5 +1,5 @@
-// import { ref, computed } from 'vue'
-import { defineStore } from 'pinia'
+import {ref, computed} from 'vue'
+import {defineStore} from 'pinia'
 
 // const todos = [
 //   {
@@ -49,7 +49,7 @@ export const useTodoStore = defineStore('todo-store', {
   },
   getters: {
     sorted() {
-      return this.todo.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+      return this.todo.sort((a, b) => b.id - a.id)
     },
     complete(state) {
       const result = []
@@ -80,12 +80,21 @@ export const useTodoStore = defineStore('todo-store', {
         })
     },
     addTodo(todo) {
+      //
+      const errorMsg = ref('')
+      const successMsg = ref('')
+      const loading = ref(false)
+      //
+      errorMsg.value = ''
+      successMsg.value = ''
+      loading.value = true
+      ////
       const newTask = {
         title: todo.title,
         body: todo.body,
         status: todo.status,
       }
-      console.log(newTask);
+
       // add this to state
       this.todo.push(newTask)
       // api call
@@ -95,10 +104,26 @@ export const useTodoStore = defineStore('todo-store', {
         headers: {
           'Content-Type': 'application/json',
         },
-      }).catch((error) => {
-        this.errorMsg = error
-        this.loading = false
+      }).then(response => {
+        if (!response.ok) {
+          return response.text().then(text => {
+            throw new Error(`Http error ! status: ${response.status},msg:${text}`)
+          })
+        }
+        return response.json()
+      }).then(data => {
+        successMsg.value = data.msg || 'Task added successfully'
+        console.log('Server response:', data)
+
+        // clear the form
+        newTask.title = ''
+        newTask.body = ''
+        newTask.status = 1
       })
+        .catch((error) => {
+          this.errorMsg = error
+          this.loading = false
+        })
     },
     deleteTodo(id) {
       //
