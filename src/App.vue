@@ -14,13 +14,11 @@ todoStore.getTodo()
 <template>
   <ThemeProvider>
     <header>
-      <div class="wrapper">
         <nav>
           <RouterLink to="/" class="nav-link">Home</RouterLink>
           <RouterLink to="/new-task" class="nav-link">New Todo</RouterLink>
         </nav>
         <ThemeDisplay></ThemeDisplay>
-      </div>
     </header>
     <RouterView/>
   </ThemeProvider>
