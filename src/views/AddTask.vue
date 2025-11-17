@@ -19,7 +19,7 @@ const submitForm = () => {
     status: selectStatus.value
   })
 }
-// todo is object use as state used in this project
+// todo is object use as state in this project
 watch(todoStore.todo,
   () => router.push({name: 'home'}))
 
