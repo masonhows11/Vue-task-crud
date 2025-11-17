@@ -1,24 +1,28 @@
 <script setup>
-import { reactive,ref } from 'vue'
-//
 import Wrapper_section from '@/components/Wrapper_section.vue'
+import {reactive, ref, watch} from 'vue'
+import {useRouter} from "vue-router";
 // import todo state
-import { useTodoStore } from '@/stores/todo'
+import {useTodoStore} from '@/stores/todo'
 // use the useTodoStore
 const todoStore = useTodoStore()
+const router = useRouter()
 const selectStatus = ref(1)
 const newTask = reactive({
   title: '',
   body: '',
 })
-
+//
 const submitForm = () => {
-
   todoStore.addTodo({
     ...newTask,
-    status:selectStatus.value
+    status: selectStatus.value
   })
 }
+// todo is object use as state used in this project
+watch(todoStore.todo,
+  () => router.push({name: 'home'}))
+
 </script>
 
 <template>
@@ -28,7 +32,7 @@ const submitForm = () => {
 
       <div>
         <label for="title">Title</label>
-        <input v-model="newTask.title" type="text" id="title" />
+        <input v-model="newTask.title" type="text" id="title"/>
       </div>
 
       <div>
@@ -60,14 +64,18 @@ form {
   border-radius: 10px;
   height: 100%;
 }
+
 h3 {
   margin-bottom: 2rem;
 }
+
 div {
   margin-bottom: 1rem;
+
   label {
     font-weight: 300;
   }
+
   input,
   textarea,
   select {
@@ -77,20 +85,24 @@ div {
     border: 1px solid #333;
     padding: 5px;
     border-radius: 5px;
+
     &:focus {
       outline: 2px solid #3b82f6;
       border: none;
     }
   }
+
   button {
     background: #3b82f6;
     color: #fff;
     width: 100%;
     padding: 5px;
     border-radius: 5px;
+
     &:hover {
       background: #2563eb;
     }
+
     &:disabled {
       background: #aaa;
       cursor: not-allowed;

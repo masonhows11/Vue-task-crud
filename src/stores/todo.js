@@ -1,43 +1,7 @@
 import {ref, computed} from 'vue'
 import {defineStore} from 'pinia'
 
-// const todos = [
-//   {
-//     id: 1,
-//     title: 'title-one',
-//     body: 'sample body one one',
-//     createdAt: '11/10/2024',
-//     status: true,
-//   },
-//   {
-//     id: 2,
-//     title: 'title-two',
-//     body: 'sample body one two',
-//     createdAt: '11/09/2024',
-//     status: true,
-//   },
-//   {
-//     id: 3,
-//     title: 'title-three',
-//     body: 'sample body one three',
-//     createdAt: '11/08/2024',
-//     status: true,
-//   },
-//   {
-//     id: 4,
-//     title: 'title-four',
-//     body: 'sample body one four',
-//     createdAt: '11/07/2024',
-//     status: false,
-//   },
-//   {
-//     id: 5,
-//     title: 'title-five',
-//     body: 'sample body one five',
-//     createdAt: '11/06/2024',
-//     status: false,
-//   },
-// ]
+
 export const useTodoStore = defineStore('todo-store', {
   state() {
     return {
@@ -115,12 +79,12 @@ export const useTodoStore = defineStore('todo-store', {
         successMsg.value = data.msg || 'Task added successfully'
         console.log('Server response:', data)
 
-        // clear the form
+        //// clear the form
         newTask.title = ''
         newTask.body = ''
         newTask.status = 1
-      })
-        .catch((error) => {
+        ////
+      }).catch((error) => {
           this.errorMsg = error
           this.loading = false
         })
